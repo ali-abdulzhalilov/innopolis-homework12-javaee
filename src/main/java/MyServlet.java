@@ -1,3 +1,4 @@
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,14 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="MyServlet")
+@WebServlet(urlPatterns = "/hello")
 public class MyServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
+    @EJB(beanName = "GetFilesEjb")
+    private GetFilesEjbLocal getFilesBean;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        out.println("Hello, World");
+        out.println(getFilesBean.getHello());
     }
 }

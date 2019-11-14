@@ -4,13 +4,4 @@
 
 <web-app>
   <display-name>Local File Hierarchy Web Application</display-name>
-
-  <servlet>
-    <servlet-name>MyServlet</servlet-name>
-    <servlet-class>MyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MyServlet</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
 </web-app>
