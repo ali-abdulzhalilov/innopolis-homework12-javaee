@@ -15,6 +15,6 @@ public class MyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        out.println(getFilesBean.getHello());
+        out.println(getFilesBean.getFileStructure());
     }
 }
