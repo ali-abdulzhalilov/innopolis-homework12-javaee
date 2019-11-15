@@ -1,26 +1,24 @@
+import entity.LeveledFile;
+
 import javax.ejb.Stateless;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class GetFilesEjb implements GetFilesEjbLocal {
     @Override
-    public String getFileStructure() {
-        return getStructure(new File("."), "");
+    public List<LeveledFile> getFileStructure() {
+        return getStructure(new File("."), 0);
     }
 
-    private String getStructure(File file, String prefix) {
-        String result = prefix + file.getName() + '\n';
+    private List<LeveledFile> getStructure(final File file, int level) {
+        ArrayList<LeveledFile> result = new ArrayList<>();
+        result.add(new LeveledFile(file.getName(), level, file.isDirectory()));
 
-        if (file.isDirectory()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(prefix).append(file.getName()).append('\n');
-
-            File[] files = file.listFiles();
-            for (File someFile : files)
-                stringBuilder.append(getStructure(someFile, prefix + "| "));
-
-            result = stringBuilder.toString();
-        }
+        if (file.isDirectory())
+            for (File someFile : file.listFiles())
+                result.addAll(getStructure(someFile, level + 1));
 
         return result;
     }
